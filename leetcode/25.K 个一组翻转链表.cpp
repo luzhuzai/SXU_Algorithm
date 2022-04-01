@@ -1,10 +1,14 @@
-# SXU_Algorithm
-## luzaizai的刷题记录
+// 方法一：模拟
+// 模拟整个翻转的流程
 
-#### leetcode 25.K 个一组翻转链表
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+ };
 
-方法一：模拟
-模拟整个翻转的流程
 class Solution {
 public:
     pair<ListNode*,ListNode*> Myreverse(ListNode* head,ListNode* tail){
@@ -48,8 +52,8 @@ public:
         return hair->next;
     }
 };
-方法二：递归
-将多个反转变为一个反转
+// 方法二：递归
+// 将多个反转变为一个反转
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
