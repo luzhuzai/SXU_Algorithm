@@ -82,20 +82,22 @@
 
 #### leetcode 215.数组中的第K个最大元素
 使用c++的优先队列去完成
+    
+
     class Solution {
-    public:
-        int findKthLargest(vector<int>& nums, int k) {
-            priority_queue<int,vector<int>, greater<int>> q;
-            for(auto &i:nums){
-                if(q.size()<k){
-                    q.push(i);
-                }else{
-                    if(i>q.top()){
-                        q.pop();
+        public:
+            int findKthLargest(vector<int>& nums, int k) {
+                priority_queue<int,vector<int>, greater<int>> q;
+                for(auto &i:nums){
+                    if(q.size()<k){
                         q.push(i);
+                    }else{
+                        if(i>q.top()){
+                            q.pop();
+                            q.push(i);
+                        }
                     }
                 }
+                return q.top();
             }
-            return q.top();
-        }
-    };
+        };
