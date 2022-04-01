@@ -5,6 +5,7 @@
 
 方法一：模拟
 模拟整个翻转的流程
+
 class Solution {
 public:
     pair<ListNode*,ListNode*> Myreverse(ListNode* head,ListNode* tail){
@@ -50,6 +51,7 @@ public:
 };
 方法二：递归
 将多个反转变为一个反转
+
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
