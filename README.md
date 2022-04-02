@@ -184,3 +184,83 @@ struct DoubleList{
     
 };
 ```
+
+#### leetcode42.接雨水
+找规律求解
+```cpp
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int nums = height.size();
+        vector<int> left(nums);
+        vector<int> right(nums);
+        
+        left[0] = height[0];
+        for(int i=1;i<nums;i++){
+            left[i] = max(left[i-1],height[i]);
+        }
+        right[nums-1] = height[nums-1];
+        for(int i=nums-2;i>=0;i--){
+            right[i] = max(right[i+1],height[i]);
+        }
+        int res = 0;
+        for(int i=0;i<nums;i++){
+            res += min(left[i],right[i]) - height[i];
+        }
+        return res;
+    }
+};
+```
+双指针做法
+```cpp
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int res = 0;
+        int left = 0, right = height.size()-1;
+        int leftMax = height[0],rightMax = height[height.size()-1];
+        while(left<right){
+            leftMax = max(leftMax, height[left]);
+            rightMax = max(rightMax, height[right]);
+            if (height[left] < height[right]) {
+                res += leftMax - height[left];
+                ++left;
+            } else {
+                res += rightMax - height[right];
+                --right;
+            }
+        }
+        return res;
+    }
+};
+```
+
+#### leetcode39.组合总和
+使用深搜递归
+```cpp
+class Solution {
+public:
+    void dfs(vector<vector<int>>& res,vector<int>& ans,vector<int>& candidates, int target,int dex){
+        if(dex == candidates.size()){
+            return ;
+        }
+        if(target==0){
+            res.push_back(ans);
+            return;
+        }
+        dfs(res,ans,candidates,target,dex+1);
+        if(target-candidates[dex]>=0){
+            ans.push_back(candidates[dex]);
+            dfs(res,ans,candidates,target-candidates[dex],dex);
+            ans.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> combine;
+        dfs(ans, combine, candidates, target, 0);
+        return ans;
+
+    }
+};
+```
